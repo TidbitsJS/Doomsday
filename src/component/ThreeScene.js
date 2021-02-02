@@ -57,7 +57,7 @@ class ThreeScene extends Component {
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
 
-    this.cube.position.y = -2;
+    this.cube.position.y = -4;
 
     new THREE.TextureLoader().load(
       "./assets/freedom.jpeg",
@@ -85,8 +85,8 @@ class ThreeScene extends Component {
         "./assets/freedom.obj",
         (object) => {
           this.freedomMesh = object;
-          this.freedomMesh.position.setY(3);
-          this.freedomMesh.scale.set(0.02, 0.02, 0.02);
+          this.freedomMesh.position.setY(1);
+          this.freedomMesh.scale.set(0.035, 0.035, 0.035);
           this.scene.add(this.freedomMesh);
         },
         (xhr) => {
