@@ -6,7 +6,7 @@ import OrbitControls from "three-orbitcontrols";
 class ThreeScene extends Component {
   constructor(props) {
     super(props);
-    this.state = { width: 1000, height: 650 };
+    this.state = { width: 100, height: 100 };
   }
 
   componentDidMount() {
@@ -26,7 +26,9 @@ class ThreeScene extends Component {
     this.camera.position.z = 20;
     this.camera.position.y = 5;
 
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.target.set(0, 0, 0);
+    this.controls.update();
 
     var lights = [];
     lights[0] = new THREE.PointLight(0x304ffe, 1, 0);
@@ -74,7 +76,7 @@ class ThreeScene extends Component {
     );
 
     var mtlLoader = new MTLLoader();
-    mtlLoader.setBaseUrl("./assets/");
+    mtlLoader.setTexturePath("./assets/");
     mtlLoader.load("freedom.mtl", (materials) => {
       materials.preload();
       console.log("Material loaded");
@@ -119,6 +121,7 @@ class ThreeScene extends Component {
     if (this.cube) this.cube.rotation.y += 0.01;
     if (this.freedomMesh) this.freedomMesh.rotation.y += 0.01;
 
+    this.controls.update();
     this.renderScene();
     this.frameId = window.requestAnimationFrame(this.animate);
   };
